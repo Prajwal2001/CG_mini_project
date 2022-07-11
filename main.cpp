@@ -168,7 +168,7 @@ void Initialize() {
     // Reset the array
     for(temp1=0;temp1<MAX;temp1++){
         a[temp1]=rand()%100+1;
-        //printf("%d ",a[temp1]);
+        
     }
 
     // Reset all values
@@ -207,7 +207,6 @@ void display()
     char text[10];
     for(ix=0;ix<MAX;ix++)
     {
-        printf("%d,%d,%d\n",R,G,B);
         glColor3f(R, G, B);
         glBegin(GL_POLYGON);
             glVertex2f(10+(700/(MAX+1))*ix,50);
@@ -224,7 +223,7 @@ void display()
         glEnd();
 
         int_str(a[ix],text);
-        //printf("\n%s",text);
+        
         glColor3f(0,0,0);
         bitmap_output(12+(700/(MAX+1))*ix, 35, text,GLUT_BITMAP_TIMES_ROMAN_10);
     }
@@ -295,13 +294,13 @@ void selectionsort()
                     }
                 }
             }
-            //printf("\ni=%d min=%d at %d",i,min,pos);
-            //printf("\nchecking %d and %d",min,a[i]);
+            
+            
             if(min<a[i])
             {
 
             //j=pos;
-            //printf("\nswapping %d and %d",min,a[i]);
+            
                 temp=a[pos];
                 a[pos]=a[i];
                 a[i]=temp;
@@ -334,7 +333,7 @@ void bubblesort()
             }
             j++;
             if(j==MAX-1) j=0;
-            //printf("swap %d and %d\n",a[j],a[j+1]);
+            
         }
     }
     sorting=0;
