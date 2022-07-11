@@ -6,7 +6,7 @@
 
 #define SORT_NO 4 // Number of sorting algorithms
 #define MAX 50 // Number of values in the array
-#define SPEED 510 // Speed of sorting, must be greater than MAX always
+#define SPEED 210 // Speed of sorting, must be greater than MAX always
 
 int a[MAX]; // Array
 int swapflag=0; // Flag to check if swapping has occured
@@ -18,7 +18,7 @@ int k=0; // To Switch from Welcome screen to Main Screen
 int sorting=0; // 1 if Sorted
 char *sort_string[]={"Bubble Sort","Selection Sort","Insertion Sort","Ripple Sort"};
 int sort_count=0; // To cycle through the string
-int selection = 0, R=0, G=0, B=0;
+int selection = 0, R=1, G=0, B=0;
 
 
 char *strrev(char *str)
@@ -93,14 +93,14 @@ char* my_itoa(int num, char* str, int base)
 
 
 // Function to integer to string
-void int_str(int rad,char r[])
-{
-    my_itoa(rad,r,10);
-}
+//void int_str(int rad,char r[])
+//{
+//    my_itoa(rad,r,10);
+//}
 
 void display_text()
 {
-    glColor3f(R,G,B);
+    glColor3f(0,0,0);
     bitmap_output(150, 665, "DYNAMIC SORTING ALGORITHM VISUALIZER",GLUT_BITMAP_TIMES_ROMAN_24);
     glBegin(GL_LINE_LOOP);
         glVertex2f(145, 660);
@@ -119,8 +119,9 @@ void display_text()
         bitmap_output(10, 535, "Press c to SELECT the sort algorithm",GLUT_BITMAP_9_BY_15);
         bitmap_output(10, 515, "Press r to RANDOMISE",GLUT_BITMAP_9_BY_15);
         bitmap_output(10, 495, "Esc to QUIT",GLUT_BITMAP_9_BY_15);
-        bitmap_output(10, 475, "Selected sort: ",GLUT_BITMAP_9_BY_15);
-        bitmap_output(150, 475, *(sort_string+sort_count),GLUT_BITMAP_9_BY_15);
+        bitmap_output(10, 455, "Selected sort: ",GLUT_BITMAP_TIMES_ROMAN_24);
+        glColor3f(R,G,B);
+        bitmap_output(120, 455, *(sort_string+sort_count),GLUT_BITMAP_TIMES_ROMAN_24);
     }
     else if (sorting == 1) // while sorting
     {
@@ -201,32 +202,32 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT);
 
     if(k==0)
-    front();
+    	front();
     else{
-    display_text();
-    char text[10];
-    for(ix=0;ix<MAX;ix++)
-    {
-        printf("%d,%d,%d\n",R,G,B);
-        glColor3f(R, G, B);
-        glBegin(GL_POLYGON);
-            glVertex2f(10+(700/(MAX+1))*ix,50);
-            glVertex2f(10+(700/(MAX+1))*(ix+1),50);
-            glVertex2f(10+(700/(MAX+1))*(ix+1),50+a[ix]*4);
-            glVertex2f(10+(700/(MAX+1))*ix,50+a[ix]*4);
-        glEnd();
-        glColor3f(0, 0, 0);
-            glBegin(GL_LINE_LOOP);
-            glVertex2f(10+(700/(MAX+1))*ix,50);
-            glVertex2f(10+(700/(MAX+1))*(ix+1),50);
-            glVertex2f(10+(700/(MAX+1))*(ix+1),50+a[ix]*4);
-            glVertex2f(10+(700/(MAX+1))*ix,50+a[ix]*4);
-        glEnd();
-
-        int_str(a[ix],text);
-        //printf("\n%s",text);
-        glColor3f(0,0,0);
-        bitmap_output(12+(700/(MAX+1))*ix, 35, text,GLUT_BITMAP_TIMES_ROMAN_10);
+		display_text();
+		char text[10];
+		for(ix=0;ix<MAX;ix++)
+		{
+		    glColor3f(R, G, B);
+		    glBegin(GL_POLYGON);
+		        glVertex2f(10+(700/(MAX+1))*ix,50);
+		        glVertex2f(10+(700/(MAX+1))*(ix+1),50);
+		        glVertex2f(10+(700/(MAX+1))*(ix+1),50+a[ix]*4);
+		        glVertex2f(10+(700/(MAX+1))*ix,50+a[ix]*4);
+		    glEnd();
+		    glColor3f(0, 0, 0);
+		        glBegin(GL_LINE_LOOP);
+		        glVertex2f(10+(700/(MAX+1))*ix,50);
+		        glVertex2f(10+(700/(MAX+1))*(ix+1),50);
+		        glVertex2f(10+(700/(MAX+1))*(ix+1),50+a[ix]*4);
+		        glVertex2f(10+(700/(MAX+1))*ix,50+a[ix]*4);
+		    glEnd();
+			
+			my_itoa(a[ix],text,10);
+		    //int_str(a[ix],text);
+		    //printf("\n%s",text);
+		    glColor3f(0,0,0);
+		    bitmap_output(12+(700/(MAX+1))*ix, 35, text,GLUT_BITMAP_TIMES_ROMAN_10);
     }
 
         if(swapflag || sorting==0)
@@ -325,12 +326,12 @@ void bubblesort()
         {
             if(a[j]>a[j+1])
             {
-            swapflag=1;
-            temp=a[j];
-            a[j]=a[j+1];
-            a[j+1]=temp;
+		        swapflag=1;
+		        temp=a[j];
+		        a[j]=a[j+1];
+		        a[j+1]=temp;
 
-            goto A;
+		        goto A;
             }
             j++;
             if(j==MAX-1) j=0;
@@ -361,7 +362,11 @@ void ripplesort()
 					goto A;
 				}
 				j++;
-				if(j==MAX-1) {count++; j=MAX-count;	dirflag=1-dirflag;}
+				if(j==MAX-1) {
+					count++; 
+					j=MAX-count;	
+					dirflag=1-dirflag;
+				}
 			}
 		}
 		else
@@ -378,7 +383,8 @@ void ripplesort()
 					goto A;
 				}
 				j--;
-				if(j==0){ dirflag=1-dirflag;}
+				if(j==0) 
+					dirflag=1-dirflag;
 			}
 		}
 	}
@@ -393,10 +399,30 @@ void makedelay(int)
     {
         switch(sort_count)
         {
-            case 0: bubblesort(); R=1;G=0;B=0;   break;
-            case 1: selectionsort();    R=0;G=1;B=0; break;
-            case 2: insertionsort();    R=0;G=0;B=1; break;
-            case 3: ripplesort(); R=0;G=1;B=1;   break;
+            case 0: 
+            	bubblesort(); 
+            	R=1;
+            	G=0;
+            	B=0;   
+            	break;
+            case 1: 
+            	selectionsort();    
+            	R=0;
+            	G=1;
+            	B=0; 
+            	break;
+            case 2: 
+            	insertionsort();    
+            	R=0;
+            	G=0;
+            	B=1; 
+            	break;
+            case 3: 
+            	ripplesort(); 
+            	R=1;
+            	G=0;
+            	B=1;   
+            	break;
         }
     }
     glutPostRedisplay();
