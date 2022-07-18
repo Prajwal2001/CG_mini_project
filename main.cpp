@@ -135,15 +135,7 @@ void front()
 {
     glColor3f(0.0,0.0,1.0);
     bitmap_output(290, 565, "WELCOME!",GLUT_BITMAP_TIMES_ROMAN_24);
-    /*glBegin(GL_LINE_LOOP);
-    glVertex2f(285, 560);
-    glVertex2f(395, 560);
-    glEnd();*/
     bitmap_output(320, 525, "TO",GLUT_BITMAP_TIMES_ROMAN_24);
-    /*glBegin(GL_LINE_LOOP);
-    glVertex2f(325, 521);
-    glVertex2f(360, 521);
-    glEnd();*/
 
     bitmap_output(150, 475, "DYNAMIC SORTING ALGORITHM VISUALIZER",GLUT_BITMAP_TIMES_ROMAN_24);
     glBegin(GL_LINE_LOOP);
@@ -155,7 +147,10 @@ void front()
 
     glColor3f(1.0,0.0,0.0);
     glBegin(GL_QUADS);
-    glVertex2f(520,120.0);glVertex2f(520,170);glVertex2f(796,170);glVertex2f(796,120.0);
+		glVertex2f(520,120.0);
+		glVertex2f(520,170);
+		glVertex2f(796,170);
+		glVertex2f(796,120.0);
     glEnd();
     glColor3f(0.0,1.0,0.0);
     bitmap_output(530, 125, "Press Enter to continue.......",GLUT_BITMAP_HELVETICA_18);
